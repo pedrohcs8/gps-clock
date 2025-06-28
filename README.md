@@ -4,5 +4,5 @@ A simple gps clock based on a Waveshare RP2040 board and a Neo M8N gps modue, th
 Schematics:
 ![General Schematic](schematic.png)
 
-Result:
+Result (the bottom display does not have ghosting, its just the camera):
 ![Real World Testing](test.jpg)
