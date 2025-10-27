@@ -1,0 +1,60 @@
+.program displayDriver
+
+.side_set 1 opt
+
+pull ; Pull the data
+set x, 7 ; Set how many loops
+out null, 24
+
+outloop:
+  out pins, 1 side 0; Out 1 byte to the out pins and turn off srclk
+  jmp x-- outloop side 1 ; rerun function until X(loop counter) = 0 and register bit
+  set pins, 0 side 0 ; Turn off serial and srclk
+  set pins, 0b100 ; Turn on register pin
+  nop
+  set pins, 0b000 ; Turn off everything
+
+% c-sdk {
+static const PIO 	pio = pio0;
+static const uint	sm = 1;
+
+const uint32_t SHIFT_CLK  = 100 * 1000;	// 100 kHz
+
+#include "hardware/clocks.h"
+static inline void init_display_driver(int serialPin) {
+  pio_sm_set_pins_with_mask(pio, sm, 0b111u, 0b0u << serialPin);
+  pio_sm_set_consecutive_pindirs(pio, sm, serialPin, 3, true);
+
+  // enable the pins
+  for (int i = 0; i < 3; i++) {
+    pio_gpio_init(pio, serialPin + i);
+  }
+
+  uint offset = pio_add_program(pio, &displayDriver_program);
+  pio_sm_config c = displayDriver_program_get_default_config(offset);
+
+  sm_config_set_out_shift(&c, false, false, 32);
+
+  // set the pins variable
+  sm_config_set_set_pins(&c, serialPin, 3); // Use all available pins
+  sm_config_set_sideset_pins(&c, serialPin + 1); // Use srclk pin
+  sm_config_set_out_pins(&c, serialPin, 1); // Use serial pin
+
+  // Set state machine clock rate
+  float div = (float)clock_get_hz(clk_sys) / (SHIFT_CLK * 2);
+  sm_config_set_clkdiv(&c, div);
+
+  pio_sm_init(pio, sm, offset, &c);
+
+  pio_sm_clear_fifos(pio, sm);
+  pio_sm_set_enabled(pio, sm, true);
+}
+
+void loadData(uint32_t data) {
+  while (pio_sm_is_tx_fifo_full(pio,sm)) {
+		;
+	}
+
+  pio_sm_put_blocking(pio, sm, data);
+}
+%}

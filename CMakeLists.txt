@@ -1,4 +1,5 @@
 # Set Minimum Cmake Version
+# Set Minimum Cmake Version
 cmake_minimum_required(VERSION 3.12)
 
 # Include Build Functions
@@ -15,6 +16,9 @@ add_executable(${PROJECT_NAME}
     displays.c
 )
 
+pico_generate_pio_header(${PROJECT_NAME} ${CMAKE_CURRENT_LIST_DIR}/display-driver.pio)
+target_sources(${PROJECT_NAME} PRIVATE displays.c)
+
 pico_enable_stdio_usb(${PROJECT_NAME} 1)
 pico_enable_stdio_uart(${PROJECT_NAME} 0)
 
@@ -27,6 +31,7 @@ target_link_libraries(${PROJECT_NAME}
     hardware_gpio
     hardware_uart
     pico_multicore
+    hardware_pio
 )
 
 add_compile_definitions(PICO_STDIO_USB_CONNECT_WAIT_TIMEOUT_MS=5000)

@@ -13,9 +13,6 @@ int sentenceCounter = 0;
 char sentence[100];
 char latestRMC[100];
 
-static recursive_mutex_t setTimeMutex;
-auto_init_recursive_mutex(setTimeMutex);
-
 void processTime() {
   // Separate Time from NMEA
   char processString[100];
@@ -32,20 +29,7 @@ void processTime() {
   // Get only hours
   char *timeData = strtok(rawTime, ".");
 
-  recursive_mutex_enter_blocking(&setTimeMutex);
   setTime(timeData, date);
-  recursive_mutex_exit(&setTimeMutex);
-}
-
-void main1() {
-  while (true) {
-    recursive_mutex_enter_blocking(&setTimeMutex);
-
-    topNumbersLoop();
-    bottomNumbersLoop();
-
-    recursive_mutex_exit(&setTimeMutex);
-  }
 }
 
 int main() {
@@ -58,24 +42,20 @@ int main() {
     gpio_put(i, 1);
   }
 
-  // Init Shift Register Pins (12-15)
-  for (int i = 12; i < 16; i++) {
-    gpio_init(i);
-    gpio_set_dir(i, GPIO_OUT);
-  }
-
+  gpio_init(15);
   gpio_init(26);
   gpio_init(27);
 
+  gpio_set_dir(15, GPIO_OUT);
   gpio_set_dir(26, GPIO_OUT);
   gpio_set_dir(27, GPIO_OUT);
 
   gpio_set_function(0, GPIO_FUNC_UART);
   gpio_set_function(1, GPIO_FUNC_UART);
 
-  uart_init(uart0, 9600);
+  uart_init(uart0, 115200);
 
-  multicore_launch_core1(main1);
+  initDisplay();
 
   while (true) {
   if (uart_is_readable(uart0)) {

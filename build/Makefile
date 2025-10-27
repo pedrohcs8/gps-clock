@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/pedrohcs8/Documents/picoProjects/gps-clock
+CMAKE_SOURCE_DIR = /home/pedrohcs8/Documents/picoProjects/bakgps-clock
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/pedrohcs8/Documents/picoProjects/gps-clock/build
+CMAKE_BINARY_DIR = /home/pedrohcs8/Documents/picoProjects/bakgps-clock/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/pedrohcs8/Documents/picoProjects/gps-clock/build/CMakeFiles /home/pedrohcs8/Documents/picoProjects/gps-clock/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pedrohcs8/Documents/picoProjects/bakgps-clock/build/CMakeFiles /home/pedrohcs8/Documents/picoProjects/bakgps-clock/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/pedrohcs8/Documents/picoProjects/gps-clock/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pedrohcs8/Documents/picoProjects/bakgps-clock/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -128,6 +128,19 @@ gps-clock: cmake_check_build_system
 gps-clock/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/gps-clock.dir/build.make CMakeFiles/gps-clock.dir/build
 .PHONY : gps-clock/fast
+
+#=============================================================================
+# Target rules for targets named gps-clock_display-driver_pio_h
+
+# Build rule for target.
+gps-clock_display-driver_pio_h: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gps-clock_display-driver_pio_h
+.PHONY : gps-clock_display-driver_pio_h
+
+# fast build rule for target.
+gps-clock_display-driver_pio_h/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gps-clock_display-driver_pio_h.dir/build.make CMakeFiles/gps-clock_display-driver_pio_h.dir/build
+.PHONY : gps-clock_display-driver_pio_h/fast
 
 #=============================================================================
 # Target rules for targets named ELF2UF2Build
@@ -1015,6 +1028,30 @@ home/pedrohcs8/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.obj
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/gps-clock.dir/build.make CMakeFiles/gps-clock.dir/home/pedrohcs8/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.obj
 .PHONY : home/pedrohcs8/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.obj
 
+home/pedrohcs8/pico/pico-sdk/src/rp2_common/hardware_pio/pio.obj: home/pedrohcs8/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
+.PHONY : home/pedrohcs8/pico/pico-sdk/src/rp2_common/hardware_pio/pio.obj
+
+# target to build an object file
+home/pedrohcs8/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gps-clock.dir/build.make CMakeFiles/gps-clock.dir/home/pedrohcs8/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
+.PHONY : home/pedrohcs8/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
+
+home/pedrohcs8/pico/pico-sdk/src/rp2_common/hardware_pio/pio.i: home/pedrohcs8/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.i
+.PHONY : home/pedrohcs8/pico/pico-sdk/src/rp2_common/hardware_pio/pio.i
+
+# target to preprocess a source file
+home/pedrohcs8/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gps-clock.dir/build.make CMakeFiles/gps-clock.dir/home/pedrohcs8/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.i
+.PHONY : home/pedrohcs8/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.i
+
+home/pedrohcs8/pico/pico-sdk/src/rp2_common/hardware_pio/pio.s: home/pedrohcs8/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.s
+.PHONY : home/pedrohcs8/pico/pico-sdk/src/rp2_common/hardware_pio/pio.s
+
+# target to generate assembly for a file
+home/pedrohcs8/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gps-clock.dir/build.make CMakeFiles/gps-clock.dir/home/pedrohcs8/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.s
+.PHONY : home/pedrohcs8/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.s
+
 home/pedrohcs8/pico/pico-sdk/src/rp2_common/hardware_pll/pll.obj: home/pedrohcs8/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj
 .PHONY : home/pedrohcs8/pico/pico-sdk/src/rp2_common/hardware_pll/pll.obj
 
@@ -1748,6 +1785,7 @@ help:
 	@echo "... bs2_default_bin"
 	@echo "... bs2_default_padded_checksummed_asm"
 	@echo "... cyw43_driver_picow_cyw43_bus_pio_spi_pio_h"
+	@echo "... gps-clock_display-driver_pio_h"
 	@echo "... bs2_default"
 	@echo "... gps-clock"
 	@echo "... displays.obj"
@@ -1851,6 +1889,9 @@ help:
 	@echo "... home/pedrohcs8/pico/pico-sdk/src/rp2_common/hardware_irq/irq.i"
 	@echo "... home/pedrohcs8/pico/pico-sdk/src/rp2_common/hardware_irq/irq.s"
 	@echo "... home/pedrohcs8/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.obj"
+	@echo "... home/pedrohcs8/pico/pico-sdk/src/rp2_common/hardware_pio/pio.obj"
+	@echo "... home/pedrohcs8/pico/pico-sdk/src/rp2_common/hardware_pio/pio.i"
+	@echo "... home/pedrohcs8/pico/pico-sdk/src/rp2_common/hardware_pio/pio.s"
 	@echo "... home/pedrohcs8/pico/pico-sdk/src/rp2_common/hardware_pll/pll.obj"
 	@echo "... home/pedrohcs8/pico/pico-sdk/src/rp2_common/hardware_pll/pll.i"
 	@echo "... home/pedrohcs8/pico/pico-sdk/src/rp2_common/hardware_pll/pll.s"
