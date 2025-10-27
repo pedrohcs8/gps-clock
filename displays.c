@@ -137,6 +137,12 @@ bool runBottomLoop(__unused repeating_timer_t *t) {
   return true;
 }
 
+void initDisplay() {
+  init_display_driver(12);
+  add_repeating_timer_us(400, runTopLoop, NULL, &topDispTimer);
+  add_repeating_timer_us(400, runBottomLoop, NULL, &bottomDispTimer);
+}
+
 void setTime(char *gpsTime, char *gpsDate) {
   // Separate wanted time and date for parsing to int
   char utcHoursChar[3];
@@ -200,10 +206,4 @@ void setTime(char *gpsTime, char *gpsDate) {
 
   strcpy(timeString, processedTime);
   strcpy(dateString, processedDate);
-}
-
-void initDisplay() {
-  init_display_driver(12);
-  add_repeating_timer_us(400, runTopLoop, NULL, &topDispTimer);
-  add_repeating_timer_us(400, runBottomLoop, NULL, &bottomDispTimer);
 }

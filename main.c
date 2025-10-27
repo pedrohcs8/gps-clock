@@ -4,7 +4,6 @@
 #include "pico/stdlib.h"
 #include "hardware/gpio.h"
 #include "hardware/uart.h"
-#include "pico/multicore.h"
 
 #include "displays.h"
 
